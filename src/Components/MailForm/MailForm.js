@@ -6,8 +6,8 @@ const MailForm = ({ addMail }) => {
   const [job, setJob] = useState("");
   const [location, setLocation] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [jobAdvert, setJobAdvert] = useState("");
   const [sendDate, setSendDate] = useState("");
-
   const [contractType, setContractType] = useState("");
   const [workingHours, setWorkingHours] = useState("");
 
@@ -17,6 +17,7 @@ const MailForm = ({ addMail }) => {
       job,
       location,
       recipient,
+      jobAdvert,
       sendDate,
       contractType,
       workingHours,
@@ -26,6 +27,7 @@ const MailForm = ({ addMail }) => {
     setJob("");
     setLocation("");
     setRecipient("");
+    setJobAdvert("");
     setSendDate("");
     setContractType("");
     setWorkingHours("");
@@ -58,6 +60,12 @@ const MailForm = ({ addMail }) => {
         onChange={(e) => setRecipient(e.target.value)}
         placeholder="Nom de l'entreprise"
         required
+      />
+      <input
+        type="text"
+        value={jobAdvert}
+        onChange={(e) => setJobAdvert(e.target.value)}
+        placeholder="Ressource"
       />
       <input
         type="date"

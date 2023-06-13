@@ -6,6 +6,7 @@ const MailList = ({
   deleteMail,
   updateMailStatus,
   updateMailDetails,
+  addMail,
 }) => {
   const [editIndex, setEditIndex] = useState(null);
   const [editedContractType, setEditedContractType] = useState("");
@@ -59,6 +60,7 @@ const MailList = ({
               <th>Métier recherché</th>
               <th>Lieu de l'entreprise</th>
               <th>Destinataire</th>
+              <th>Ressource</th>
               <th>Date d'envoi</th>
               <th>Type de contrat</th>
               <th>Horaires</th>
@@ -113,6 +115,18 @@ const MailList = ({
                 <td>
                   {editIndex === index ? (
                     <input
+                      type="text"
+                      value={mail.jobAdvert}
+                      onChange={(e) => handleInputChange(e, index)}
+                      name="jobAdvert"
+                    />
+                  ) : (
+                    mail.jobAdvert
+                  )}
+                </td>
+                <td>
+                  {editIndex === index ? (
+                    <input
                       type="date"
                       value={mail.sendDate}
                       onChange={(e) => handleInputChange(e, index)}
@@ -131,8 +145,8 @@ const MailList = ({
                     >
                       <option value="">Sélectionnez le type de contrat</option>
                       <option value="Alternance">Alternance</option>
-                      <option value="CDD">CDD</option>
                       <option value="CDI">CDI</option>
+                      <option value="CDD">CDD</option>
                       <option value="Intérim">Intérim</option>
                       <option value="Stage">Stage</option>
                       {/* Ajoutez d'autres options de contrat si nécessaire */}
@@ -148,10 +162,11 @@ const MailList = ({
                       onChange={(e) => handleInputChange(e, index)}
                       name="workingHours"
                     >
-                      <option value="">Sélectionnez le type d'horaires</option>
+                      <option value="">Sélectionnez les horaires</option>
                       <option value="Mi-temps">Mi-temps</option>
                       <option value="Temps partiel">Temps partiel</option>
                       <option value="Temps plein">Temps plein</option>
+                      {/* Ajoutez d'autres options d'horaires si nécessaire */}
                     </select>
                   ) : (
                     mail.workingHours
