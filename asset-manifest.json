@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Mail-Search-Job-Manager/static/css/main.2d052dab.css",
+    "main.js": "/Mail-Search-Job-Manager/static/js/main.cf33dd57.js",
+    "index.html": "/Mail-Search-Job-Manager/index.html",
+    "main.2d052dab.css.map": "/Mail-Search-Job-Manager/static/css/main.2d052dab.css.map",
+    "main.cf33dd57.js.map": "/Mail-Search-Job-Manager/static/js/main.cf33dd57.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2d052dab.css",
+    "static/js/main.cf33dd57.js"
+  ]
+}
