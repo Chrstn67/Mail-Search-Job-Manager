@@ -14,7 +14,7 @@ const MailList = ({ mails, deleteMail, updateStatus }) => {
 
   return (
     <div className="list-container">
-      <h2>Liste des courriers :</h2>
+      <h2>Liste des courriers envoyés:</h2>
       {mails.length > 0 ? (
         <table>
           <thead>
@@ -25,13 +25,18 @@ const MailList = ({ mails, deleteMail, updateStatus }) => {
               <th>Date d'envoi</th>
               <th>Type de contrat</th>
               <th>Horaires</th>
-              <th>Statut</th>
+              <th>Réponse</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {mails.map((mail, index) => (
-              <tr key={index}>
+              <tr
+                key={index}
+                className={`status-${mail.status
+                  .toLowerCase()
+                  .replace(/\s/g, "-")}`}
+              >
                 <td>{mail.job}</td>
                 <td>{mail.location}</td>
                 <td>{mail.recipient}</td>

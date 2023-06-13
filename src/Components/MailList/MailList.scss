@@ -1,6 +1,7 @@
 .list-container {
   max-width: 100%;
   overflow-x: scroll;
+
   table {
     background-color: #fff;
     width: 100%;
@@ -30,6 +31,18 @@
 
         &:last-child td {
           border-bottom: none;
+        }
+
+        &.status-en-attente {
+          background-color: #d1cece;
+        }
+
+        &.status-positive {
+          background-color: rgb(11, 230, 11);
+        }
+
+        &.status-négative {
+          background-color: red;
         }
       }
     }
