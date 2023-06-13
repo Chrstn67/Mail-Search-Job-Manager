@@ -73,8 +73,8 @@ const MailForm = ({ addMail }) => {
       >
         <option value="">Sélectionnez le type de contrat</option>
         <option value="Alternance">Alternance</option>
-        <option value="CDD">CDD</option>
         <option value="CDI">CDI</option>
+        <option value="CDD">CDD</option>
         <option value="Intérim">Intérim</option>
         <option value="Stage">Stage</option>
         {/* Ajoutez d'autres options de contrat si nécessaire */}

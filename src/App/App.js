@@ -34,9 +34,15 @@ const App = () => {
     setMails(updatedMails);
   };
 
-  const updateStatus = (index, key, value) => {
+  const updateMailStatus = (index, status) => {
     const updatedMails = [...mails];
-    updatedMails[index][key] = value;
+    updatedMails[index].status = status;
+    setMails(updatedMails);
+  };
+
+  const updateMailDetails = (index, updatedMail) => {
+    const updatedMails = [...mails];
+    updatedMails[index] = updatedMail;
     setMails(updatedMails);
   };
 
@@ -48,7 +54,8 @@ const App = () => {
       <MailList
         mails={mails}
         deleteMail={deleteMail}
-        updateStatus={updateStatus}
+        updateMailStatus={updateMailStatus}
+        updateMailDetails={updateMailDetails}
       />
     </div>
   );
