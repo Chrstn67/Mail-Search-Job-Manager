@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import MailForm from "../Components/MailForm/MailForm";
 import MailList from "../Components/MailList/MailList";
+import MentionsLegales from "../Components/MentionsLegales/MentionsLegales";
 import "./App.scss";
 
 const App = () => {
@@ -41,15 +43,38 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Gestion de courrier de candidature</h1>
-      <MailForm addMail={addMail} />
-      <MailList
-        mails={mails}
-        deleteMail={deleteMail}
-        updateStatus={updateStatus}
-      />
-    </div>
+    <Router>
+      <div>
+        <h1>Gestion de courrier de candidature</h1>
+
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Accueil</Link>
+            </li>
+            <li>
+              <Link to="/mentions-legales">Mentions légales</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<MailForm addMail={addMail} />}>
+            <Route
+              index
+              element={
+                <MailList
+                  mails={mails}
+                  deleteMail={deleteMail}
+                  updateStatus={updateStatus}
+                />
+              }
+            />
+          </Route>
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
