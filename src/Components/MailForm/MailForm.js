@@ -1,5 +1,4 @@
-// MailForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MailForm.scss";
 
 const MailForm = ({ addMail }) => {
@@ -10,12 +9,50 @@ const MailForm = ({ addMail }) => {
   const [sendDate, setSendDate] = useState("");
   const [contractType, setContractType] = useState("");
   const [workingHours, setWorkingHours] = useState("");
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  useEffect(() => {
+    const fetchCitySuggestions = async (inputValue) => {
+      try {
+        const response = await fetch(
+          `https://geo.api.gouv.fr/communes?nom=${inputValue}&fields=nom,departement&limit=10`
+        );
+        const data = await response.json();
+        const options = data.map((feature) => ({
+          label: `${feature.nom}, ${feature.departement.code} - ${feature.departement.nom}`,
+          department: feature.departement,
+          value: feature.nom,
+        }));
+
+        setCityOptions(options);
+      } catch (error) {
+        console.error("Error fetching city suggestions:", error);
+      }
+    };
+
+    if (location.length > 0) {
+      fetchCitySuggestions(location);
+    } else {
+      setCityOptions([]);
+    }
+  }, [location]);
+
+  const handleCityInputChange = (inputValue) => {
+    setLocation(inputValue);
+    setSelectedCity(null);
+  };
+
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
+    setLocation(selectedOption ? selectedOption.label : "");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const mailDetails = {
       job,
-      location,
+      location: selectedCity ? selectedCity.label : "",
       recipient,
       jobAdvert,
       sendDate,
@@ -23,16 +60,16 @@ const MailForm = ({ addMail }) => {
       workingHours,
       status: "En attente",
     };
+
     addMail(mailDetails);
     setJob("");
-    setLocation("");
+    setSelectedCity(null);
     setRecipient("");
     setJobAdvert("");
     setSendDate("");
     setContractType("");
     setWorkingHours("");
 
-    // Mise à jour du localStorage
     const updatedMails = JSON.parse(localStorage.getItem("mails")) || [];
     updatedMails.push(mailDetails);
     localStorage.setItem("mails", JSON.stringify(updatedMails));
@@ -47,13 +84,32 @@ const MailForm = ({ addMail }) => {
         placeholder="Métier recherché"
         required
       />
-      <input
-        type="text"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        placeholder="Lieu de l'entreprise"
-        required
-      />
+      <div className="city-autocomplete">
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => handleCityInputChange(e.target.value)}
+          placeholder="Lieu de l'entreprise"
+          required
+        />
+        {cityOptions.length > 0 && (
+          <ul className="city-options">
+            {cityOptions.map((option) => (
+              <li
+                key={`${option.value}-${option.label}`}
+                onClick={() => handleCityChange(option)}
+                className={`city-option ${
+                  selectedCity && selectedCity.value === option.value
+                    ? "selected"
+                    : ""
+                }`}
+              >
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <input
         type="text"
         value={recipient}

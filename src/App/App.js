@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "../Components/Header/Header";
 import MailForm from "../Components/MailForm/MailForm";
 import MailList from "../Components/MailList/MailList";
 import "./App.scss";
@@ -48,9 +49,9 @@ const App = () => {
 
   return (
     <div>
-      <h1>Gestion de courrier de candidature</h1>
+      <Header />
 
-      <MailForm addMail={addMail} />
+      <MailForm addMail={addMail} setMails={setMails} />
       <MailList
         mails={mails}
         deleteMail={deleteMail}

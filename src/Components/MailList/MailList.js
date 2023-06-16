@@ -7,6 +7,7 @@ const MailList = ({
   updateMailStatus,
   updateMailDetails,
   addMail,
+  selectedCity,
 }) => {
   const [editIndex, setEditIndex] = useState(null);
   const [editedContractType, setEditedContractType] = useState("");
@@ -142,6 +143,7 @@ const MailList = ({
                       value={editedContractType}
                       onChange={(e) => handleInputChange(e, index)}
                       name="contractType"
+                      required
                     >
                       <option value="">Sélectionnez le type de contrat</option>
                       <option value="Alternance">Alternance</option>
@@ -161,6 +163,7 @@ const MailList = ({
                       value={mail.workingHours}
                       onChange={(e) => handleInputChange(e, index)}
                       name="workingHours"
+                      required
                     >
                       <option value="">Sélectionnez les horaires</option>
                       <option value="Mi-temps">Mi-temps</option>
@@ -192,18 +195,22 @@ const MailList = ({
                       <button onClick={handleCancelClick}>Annuler</button>
                     </>
                   ) : (
-                    <button onClick={() => handleEditClick(index)}>
-                      Modifier
-                    </button>
+                    <>
+                      <button onClick={() => handleEditClick(index)}>
+                        Modifier
+                      </button>
+                      <button onClick={() => deleteMail(index)}>
+                        Supprimer
+                      </button>
+                    </>
                   )}
-                  <button onClick={() => deleteMail(index)}>Supprimer</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <p>Aucun courrier trouvé.</p>
+        <p>Aucun courrier envoyé pour le moment.</p>
       )}
     </div>
   );
