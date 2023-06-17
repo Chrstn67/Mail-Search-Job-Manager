@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./MailForm.scss";
 
 const MailForm = ({ addMail }) => {
+  const [nextId, setNextId] = useState(1);
   const [job, setJob] = useState("");
   const [location, setLocation] = useState("");
   const [recipient, setRecipient] = useState("");
@@ -48,31 +49,46 @@ const MailForm = ({ addMail }) => {
     setLocation(selectedOption ? selectedOption.label : "");
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear().toString();
+    return `${day}-${month}-${year}`;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formattedDate = formatDate(sendDate);
     const mailDetails = {
+      id: nextId,
       job,
       location: selectedCity ? selectedCity.label : "",
       recipient,
       jobAdvert,
-      sendDate,
+      sendDate: formattedDate,
       contractType,
       workingHours,
       status: "En attente",
     };
 
     addMail(mailDetails);
+    handleClearInputs();
+
+    const updatedMails = JSON.parse(localStorage.getItem("mails")) || [];
+    updatedMails.push(mailDetails);
+    localStorage.setItem("mails", JSON.stringify(updatedMails));
+  };
+
+  const handleClearInputs = () => {
     setJob("");
-    setSelectedCity(null);
+    setLocation("");
     setRecipient("");
     setJobAdvert("");
     setSendDate("");
     setContractType("");
     setWorkingHours("");
-
-    const updatedMails = JSON.parse(localStorage.getItem("mails")) || [];
-    updatedMails.push(mailDetails);
-    localStorage.setItem("mails", JSON.stringify(updatedMails));
+    setSelectedCity(null);
   };
 
   return (
