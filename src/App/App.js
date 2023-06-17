@@ -47,6 +47,12 @@ const App = () => {
     setMails(updatedMails);
   };
 
+  const updateMailLocation = (index, location) => {
+    const updatedMails = [...mails];
+    updatedMails[index].location = location;
+    setMails(updatedMails);
+  };
+
   return (
     <div>
       <Header />
@@ -57,6 +63,7 @@ const App = () => {
         deleteMail={deleteMail}
         updateMailStatus={updateMailStatus}
         updateMailDetails={updateMailDetails}
+        updateMailLocation={updateMailLocation}
       />
     </div>
   );

@@ -121,7 +121,7 @@ const MailForm = ({ addMail }) => {
         type="text"
         value={jobAdvert}
         onChange={(e) => setJobAdvert(e.target.value)}
-        placeholder="Ressource"
+        placeholder="Lien de l'offre"
       />
       <input
         type="date"

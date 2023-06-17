@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./MailList.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MailList = ({
   mails,
@@ -8,46 +9,56 @@ const MailList = ({
   updateMailDetails,
   addMail,
   selectedCity,
+  updateMailLocation,
 }) => {
   const [editIndex, setEditIndex] = useState(null);
-  const [editedContractType, setEditedContractType] = useState("");
+  const [editedDate, setEditedDate] = useState("");
 
   const handleEditClick = (index) => {
-    const contractType = mails[index].contractType;
+    const date = mails[index].sendDate;
     setEditIndex(index);
-    setEditedContractType(contractType);
+    setEditedDate(date);
   };
 
   const handleSaveClick = (index) => {
     updateMailDetails(index, {
       ...mails[index],
-      contractType: editedContractType,
+      sendDate: editedDate,
     });
     setEditIndex(null);
-    setEditedContractType("");
+    setEditedDate("");
   };
 
   const handleCancelClick = () => {
     setEditIndex(null);
-    setEditedContractType("");
+    setEditedDate("");
   };
 
   const handleStatusChange = (index, e) => {
     const newStatus = e.target.value;
     updateMailStatus(index, newStatus);
+  };
+
+  const handleLocationChange = (index, e) => {
+    const newLocation = e.target.value;
+    updateMailLocation(index, newLocation);
 
     // Mise à jour du localStorage
     const updatedMails = JSON.parse(localStorage.getItem("mails")) || [];
-    updatedMails[index].status = newStatus;
+    const updatedMail = { ...updatedMails[index], location: newLocation };
+    updatedMails.splice(index, 1, updatedMail);
     localStorage.setItem("mails", JSON.stringify(updatedMails));
   };
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
-    if (name === "contractType") {
-      setEditedContractType(value);
+    if (name === "sendDate") {
+      setEditedDate(value);
+    } else if (name === "location") {
+      handleLocationChange(index, e);
     } else {
-      updateMailDetails(index, { ...mails[index], [name]: value });
+      const updatedMail = { ...mails[index], [name]: value };
+      updateMailDetails(index, updatedMail);
     }
   };
 
@@ -70,143 +81,150 @@ const MailList = ({
             </tr>
           </thead>
           <tbody>
-            {mails.map((mail, index) => (
-              <tr
-                key={index}
-                className={`status-${mail.status
-                  .toLowerCase()
-                  .replace(/\s/g, "-")}`}
-              >
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="text"
-                      value={mail.job}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="job"
-                    />
-                  ) : (
-                    mail.job
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="text"
-                      value={mail.location}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="location"
-                    />
-                  ) : (
-                    mail.location
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="text"
-                      value={mail.recipient}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="recipient"
-                    />
-                  ) : (
-                    mail.recipient
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="text"
-                      value={mail.jobAdvert}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="jobAdvert"
-                    />
-                  ) : (
-                    mail.jobAdvert
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <input
-                      type="date"
-                      value={mail.sendDate}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="sendDate"
-                    />
-                  ) : (
-                    mail.sendDate
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <select
-                      value={editedContractType}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="contractType"
-                      required
-                    >
-                      <option value="">Sélectionnez le type de contrat</option>
-                      <option value="Alternance">Alternance</option>
-                      <option value="CDI">CDI</option>
-                      <option value="CDD">CDD</option>
-                      <option value="Intérim">Intérim</option>
-                      <option value="Stage">Stage</option>
-                      {/* Ajoutez d'autres options de contrat si nécessaire */}
-                    </select>
-                  ) : (
-                    mail.contractType
-                  )}
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <select
-                      value={mail.workingHours}
-                      onChange={(e) => handleInputChange(e, index)}
-                      name="workingHours"
-                      required
-                    >
-                      <option value="">Sélectionnez les horaires</option>
-                      <option value="Mi-temps">Mi-temps</option>
-                      <option value="Temps partiel">Temps partiel</option>
-                      <option value="Temps plein">Temps plein</option>
-                      {/* Ajoutez d'autres options d'horaires si nécessaire */}
-                    </select>
-                  ) : (
-                    mail.workingHours
-                  )}
-                </td>
-                <td>
-                  <select
-                    value={mail.status}
-                    onChange={(e) => handleStatusChange(index, e)}
-                  >
-                    <option value="En attente">En attente</option>
-                    <option value="Positive">Positive</option>
-                    <option value="Négative">Négative</option>
-                    {/* Ajoutez d'autres options de statut si nécessaire */}
-                  </select>
-                </td>
-                <td>
-                  {editIndex === index ? (
-                    <>
-                      <button onClick={() => handleSaveClick(index)}>
-                        Enregistrer
-                      </button>
-                      <button onClick={handleCancelClick}>Annuler</button>
-                    </>
-                  ) : (
-                    <>
-                      <button onClick={() => handleEditClick(index)}>
-                        Modifier
-                      </button>
-                      <button onClick={() => deleteMail(index)}>
-                        Supprimer
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {mails.map((mail, index) => {
+              const isEditing = editIndex === index;
+              return (
+                <tr
+                  key={index}
+                  className={`status-${mail.status
+                    .toLowerCase()
+                    .replace(/\s/g, "-")}`}
+                >
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={mail.job}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="job"
+                      />
+                    ) : (
+                      mail.job
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={mail.location}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="location"
+                      />
+                    ) : (
+                      mail.location
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={mail.recipient}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="recipient"
+                      />
+                    ) : (
+                      mail.recipient
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={mail.jobAdvert}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="jobAdvert"
+                      />
+                    ) : (
+                      mail.jobAdvert
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <input
+                        type="date"
+                        value={editedDate}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="sendDate"
+                      />
+                    ) : (
+                      mail.sendDate
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <select
+                        value={mail.contractType}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="contractType"
+                        required
+                      >
+                        <option value="">
+                          Sélectionnez le type de contrat
+                        </option>
+                        <option value="Alternance">Alternance</option>
+                        <option value="CDI">CDI</option>
+                        <option value="CDD">CDD</option>
+                        <option value="Intérim">Intérim</option>
+                        <option value="Stage">Stage</option>
+                        {/* Ajoutez d'autres options de contrat si nécessaire */}
+                      </select>
+                    ) : (
+                      mail.contractType
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <select
+                        value={mail.workingHours}
+                        onChange={(e) => handleInputChange(e, index)}
+                        name="workingHours"
+                        required
+                      >
+                        <option value="">Sélectionnez les horaires</option>
+                        <option value="Mi-temps">Mi-temps</option>
+                        <option value="Temps partiel">Temps partiel</option>
+                        <option value="Temps plein">Temps plein</option>
+                      </select>
+                    ) : (
+                      mail.workingHours
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <select
+                        value={mail.status}
+                        onChange={(e) => handleStatusChange(index, e)}
+                      >
+                        <option value="En attente">En attente</option>
+                        <option value="Positive">Positive</option>
+                        <option value="Négative">Négative</option>
+                      </select>
+                    ) : (
+                      mail.status
+                    )}
+                  </td>
+                  <td>
+                    {isEditing ? (
+                      <>
+                        <button onClick={() => handleSaveClick(index)}>
+                          Enregistrer
+                        </button>
+                        <button onClick={handleCancelClick}>Annuler</button>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => handleEditClick(index)}>
+                          Modifier
+                        </button>
+                        <button onClick={() => deleteMail(index)}>
+                          Supprimer
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       ) : (
