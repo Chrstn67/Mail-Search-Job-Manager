@@ -1,6 +1,6 @@
 .list-container {
   max-width: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   table {
     background-color: #fff;
@@ -69,10 +69,15 @@
     button {
       width: 7em;
       background-color: #bedfe0;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #a2d8db;
+      }
     }
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 768px) {
     table {
       th,
       td {
