@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
 import MailForm from "../Components/MailForm/MailForm";
 import MailList from "../Components/MailList/MailList";
+import Footer from "../Components/Footer/Footer";
 import "./App.scss";
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
         updateMailDetails={updateMailDetails}
         updateMailLocation={updateMailLocation}
       />
+      <Footer />
     </div>
   );
 };

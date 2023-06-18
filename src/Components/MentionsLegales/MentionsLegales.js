@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./MentionsLegales.scss";
 const MentionsLegales = () => {
   return (
     <main>
@@ -76,6 +76,7 @@ const MentionsLegales = () => {
         français. En dehors des cas où la loi ne le permet pas, il est fait
         attribution exclusive de juridiction aux tribunaux compétents.
       </p>
+      <p>Remerciements à Konstantin Shilkov</p>
     </main>
   );
 };
