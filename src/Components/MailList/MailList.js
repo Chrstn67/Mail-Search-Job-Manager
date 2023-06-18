@@ -13,7 +13,6 @@ const MailList = ({
 }) => {
   const [editIndex, setEditIndex] = useState(null);
   const [editedDate, setEditedDate] = useState("");
-  const [sortKey, setSortKey] = useState("id");
 
   const handleEditClick = (index) => {
     const date = mails[index].sendDate;

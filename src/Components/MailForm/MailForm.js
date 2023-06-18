@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./MailForm.scss";
 
 const MailForm = ({ addMail }) => {
-  const [nextId, setNextId] = useState(1);
+  const [nextId] = useState(1);
   const [job, setJob] = useState("");
   const [location, setLocation] = useState("");
   const [recipient, setRecipient] = useState("");
@@ -47,6 +47,8 @@ const MailForm = ({ addMail }) => {
   const handleCityChange = (selectedOption) => {
     setSelectedCity(selectedOption);
     setLocation(selectedOption ? selectedOption.label : "");
+
+    setCityOptions([]); // Masque la liste déroulante si la sélection correspond à "Paris"
   };
 
   const formatDate = (dateString) => {
