@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Mail-Search-Job-Manager/static/css/main.4719ccf8.css",
-    "main.js": "/Mail-Search-Job-Manager/static/js/main.d711a3cf.js",
+    "main.js": "/Mail-Search-Job-Manager/static/js/main.987dde28.js",
     "index.html": "/Mail-Search-Job-Manager/index.html",
     "main.4719ccf8.css.map": "/Mail-Search-Job-Manager/static/css/main.4719ccf8.css.map",
-    "main.d711a3cf.js.map": "/Mail-Search-Job-Manager/static/js/main.d711a3cf.js.map"
+    "main.987dde28.js.map": "/Mail-Search-Job-Manager/static/js/main.987dde28.js.map"
   },
   "entrypoints": [
     "static/css/main.4719ccf8.css",
-    "static/js/main.d711a3cf.js"
+    "static/js/main.987dde28.js"
   ]
 }
