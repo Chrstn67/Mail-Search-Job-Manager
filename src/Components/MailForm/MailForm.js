@@ -110,11 +110,11 @@ const MailForm = ({ addMail }) => {
           placeholder="Lieu de l'entreprise"
           required
         />
-        {cityOptions.length > 0 && (
+        {cityOptions.length > 0 && !selectedCity && (
           <ul className="city-options">
             {cityOptions.map((option) => (
               <li
-                key={`${option.value}-${option.label}`}
+                key={option.value}
                 onClick={() => handleCityChange(option)}
                 className={`city-option ${
                   selectedCity && selectedCity.value === option.value
