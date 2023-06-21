@@ -1,0 +1,120 @@
+.modal-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #d0c5f7;
+  outline: 1px solid #e74c3c;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  width: 60vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 0.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+section.script-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+  text-align: center;
+}
+
+.add-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #1abc9c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.close-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #e74c3c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.notes-list {
+  margin-top: 2rem;
+}
+
+.notes-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.notes-list span {
+  flex-basis: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  word-break: break-word;
+}
+
+.notes-list textarea {
+  flex-basis: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  resize: vertical;
+  word-wrap: break-word;
+}
+
+.notes-list button {
+  background-color: #66ff00;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.notes-list button:last-child {
+  background-color: #ff0000;
+}
+
+.notes-list button + button {
+  margin-left: 0.5rem;
+}

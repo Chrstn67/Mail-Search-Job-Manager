@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
+import NotesList from "../Components/NotesList/NotesList";
 import MailForm from "../Components/MailForm/MailForm";
 import MailList from "../Components/MailList/MailList";
 import Footer from "../Components/Footer/Footer";
@@ -57,7 +58,7 @@ const App = () => {
   return (
     <div>
       <Header />
-
+      <NotesList />
       <MailForm addMail={addMail} setMails={setMails} />
       <MailList
         mails={mails}
