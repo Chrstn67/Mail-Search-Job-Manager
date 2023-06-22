@@ -8,6 +8,7 @@
   cursor: pointer;
   margin-bottom: 1em;
 }
+
 .modal {
   position: fixed;
   top: 0;
@@ -40,6 +41,35 @@ section.script-note {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1rem;
+
+  .add-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #1abc9c;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      background-color: #1eff007c;
+      color: #000;
+    }
+  }
+
+  .close-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #ff0000;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ff00007c;
+      color: #000;
+    }
+  }
 }
 
 textarea {
@@ -50,71 +80,54 @@ textarea {
   text-align: center;
 }
 
-.add-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  background-color: #1abc9c;
-  color: #fff;
-  cursor: pointer;
-}
-
-.close-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  background-color: #e74c3c;
-  color: #fff;
-  cursor: pointer;
-}
-
 .notes-list {
-  margin-top: 2rem;
-}
+  margin: 2rem;
 
-.notes-list li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
-}
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #555557;
 
-.notes-list span {
-  flex-basis: 100%;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  word-break: break-word;
-}
+    span {
+      flex-basis: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      background-color: #eafaa9;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      word-break: break-word;
+    }
 
-.notes-list textarea {
-  flex-basis: 100%;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  resize: vertical;
-  word-wrap: break-word;
-}
+    textarea {
+      flex-basis: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      resize: vertical;
+      word-wrap: break-word;
+    }
 
-.notes-list button {
-  background-color: #66ff00;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-.notes-list button:last-child {
-  background-color: #ff0000;
-}
+    button {
+      background-color: #66ff00;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
 
-.notes-list button + button {
-  margin-left: 0.5rem;
+    button:last-child {
+      background-color: #ff0000;
+    }
+
+    button + button {
+      margin-left: 0.5rem;
+    }
+  }
 }

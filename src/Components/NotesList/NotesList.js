@@ -85,11 +85,15 @@ const NotesList = () => {
   };
 
   const handleChange = (event) => {
-    setNewNote(event.target.value);
+    if (event.target.value.length <= 100) {
+      setNewNote(event.target.value);
+    }
   };
 
   const handleEditingNoteChange = (event) => {
-    setEditingNote(event.target.value);
+    if (event.target.value.length <= 100) {
+      setEditingNote(event.target.value);
+    }
   };
 
   return (
@@ -126,6 +130,7 @@ const NotesList = () => {
                             value={editingNote}
                             onChange={handleEditingNoteChange}
                             className="saved-note"
+                            maxLength={100}
                           />
 
                           <button onClick={updateNote}>Sauvegarder</button>
