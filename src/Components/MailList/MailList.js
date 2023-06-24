@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DOMPurify from "dompurify";
 import "./MailList.scss";
 
 const MailList = ({
@@ -56,7 +57,8 @@ const MailList = ({
     } else if (name === "location") {
       handleLocationChange(index, e);
     } else {
-      const updatedMail = { ...mails[index], [name]: value };
+      const sanitizedValue = DOMPurify.sanitize(value);
+      const updatedMail = { ...mails[index], [name]: sanitizedValue };
       updateMailDetails(index, updatedMail);
     }
   };

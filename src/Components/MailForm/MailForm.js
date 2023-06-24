@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DOMPurify from "dompurify";
 import "./MailForm.scss";
 
 const MailForm = ({ addMail }) => {
@@ -64,13 +65,13 @@ const MailForm = ({ addMail }) => {
     const formattedDate = formatDate(sendDate);
     const mailDetails = {
       id: nextId,
-      job,
-      location: selectedCity ? selectedCity.label : "",
-      recipient,
-      jobAdvert,
+      job: DOMPurify.sanitize(job),
+      location: selectedCity ? DOMPurify.sanitize(selectedCity.label) : "",
+      recipient: DOMPurify.sanitize(recipient),
+      jobAdvert: DOMPurify.sanitize(jobAdvert),
       sendDate: formattedDate,
-      contractType,
-      workingHours,
+      contractType: DOMPurify.sanitize(contractType),
+      workingHours: DOMPurify.sanitize(workingHours),
       status: "En attente",
     };
 

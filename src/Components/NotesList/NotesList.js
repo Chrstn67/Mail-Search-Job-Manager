@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import DOMPurify from "dompurify";
 import "./NotesList.scss";
 
 const NotesList = () => {
@@ -96,6 +97,11 @@ const NotesList = () => {
     }
   };
 
+  const sanitizeHTML = (html) => {
+    const sanitizedHTML = DOMPurify.sanitize(html);
+    return { __html: sanitizedHTML };
+  };
+
   return (
     <div>
       <button onClick={openModal} className="modal-btn">
@@ -139,7 +145,7 @@ const NotesList = () => {
                       </>
                     ) : (
                       <>
-                        <span>{note}</span>
+                        <span dangerouslySetInnerHTML={sanitizeHTML(note)} />
                         <button onClick={() => editNote(index)}>
                           Modifier
                         </button>
